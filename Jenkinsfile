@@ -1,18 +1,22 @@
 pipeline {
   agent { docker { image 'node:7-alpine' } }
   stages {
-    stage('build') {
+    stage('Deploy - Staging') {
       steps {
         sh 'node --version'
+      }
+    }
+
+    stage('Sanity check') {
+      steps {
+        input "Does the ok?"
       }
     }
   }
 
   post {
     always {
-      mail to: 'new-band007@163.com',
-           subject: "Build Failed: ${currentBuild.fullDisplayName}",
-           body: "Something is wrong ${env.BUILD_URL}"
+      sh 'ls'
     }
   }
 }

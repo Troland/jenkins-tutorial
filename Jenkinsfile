@@ -10,7 +10,9 @@ pipeline {
 
   post {
     always {
-      sh 'ls'
+      mail to: 'new-band007@163.com',
+           subject: "Build Failed: ${currentBuild.fullDisplayName}",
+           body: "Something is wrong ${env.BUILD_URL}"
     }
   }
 }

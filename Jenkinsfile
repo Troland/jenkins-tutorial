@@ -6,5 +6,10 @@ pipeline {
         sh 'node --version'
       }
     }
+  },
+  post {
+    always {
+      sh 'ls'
+    }
   }
 }

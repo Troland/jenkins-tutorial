@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        echo 'branch-${BRANCH_NAME} test build'
+        echo "branch-${BRANCH_NAME} test build"
       }
     }
   }

@@ -1,20 +1,27 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'Greeting', defaultValue: 'Hello')
+  }
   stages {
     stage('Build') {
       steps {
-        sh 'make'
-        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+        echo "${params.Greeting} World!"
       }
     }
     stage('Test') {
       steps {
-        echo 'Testing'
+        echo "$"
       }
     }
     stage('Deploy') {
+      when {
+        expression {
+          currentBuild.result == null || currentBuild.result == 'SUCCESS'
+        }
+      }
       steps {
-        echo 'Deploy'
+        sh 'make publish'
       }
     }
   }

@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    string(name: 'Greeting', defaultValue: 'Hello')
+    string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
   }
   stages {
     stage('Build') {
@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "$"
+        echo "test"
       }
     }
     stage('Deploy') {
@@ -21,7 +21,7 @@ pipeline {
         }
       }
       steps {
-        sh 'make publish'
+        echo 'finished'
       }
     }
   }

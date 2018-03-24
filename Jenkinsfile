@@ -1,19 +1,23 @@
 pipeline {
-  agent { docker { image 'node:7-alpine' } }
+  agent any
   stages {
-    stage('Deploy - Staging') {
+    stage('Build') {
       steps {
-        sh 'node --version'
+        sh 'make'
+        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
       }
     }
-
-    stage('Sanity check') {
+    stage('Test') {
       steps {
-        input "Does the ok?"
+        echo 'Testing'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploy'
       }
     }
   }
-
   post {
     always {
       sh 'ls'
